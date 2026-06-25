@@ -3,16 +3,633 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=https://helenlab.com/community/">
-    <link rel="canonical" href="https://helenlab.com/community/">
-    <title>Redirecting…</title>
-    <script>window.location.replace("https://helenlab.com/community/");</script>
+    <title>Legal Tech Frontier — Helen's Legal AI Lab</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Legal Tech Frontier | Helen's Legal AI Lab">
+    <meta property="og:description" content="A practitioner-driven legal AI community founded in Silicon Valley, connecting 1,000+ professionals across the US and Asia.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://svlegaltechfrontier.com/">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Helen's Legal AI Lab">
+
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background:#0f1115; color:#e6e6e6; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; }
-        a { color:#6ea8fe; }
+        /* Page-specific tweaks */
+        .community-hero {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            text-align: center;
+        }
+        .community-hero .hero-title {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .community-hero .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 720px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.7;
+        }
+        .stats-row {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-num {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.25rem;
+        }
+        .cities-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 1.5rem auto 0;
+            max-width: 720px;
+        }
+        .city-chip {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(102, 126, 234, 0.12);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 999px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent-cyan);
+            font-size: 0.95rem;
+            margin-top: 2rem;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover {
+            opacity: 0.75;
+        }
+        .community-cards {
+            margin: 2rem auto 0;
+        }
+        .what-we-do {
+            padding-bottom: 1rem !important;
+        }
+        section.events {
+            padding-top: 1.5rem !important;
+        }
+        .audience-block {
+            margin-top: 1.5rem !important;
+        }
+        .audience-block {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .audience-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .audience-chip {
+            padding: 0.6rem 1.4rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(102, 126, 234, 0.25);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+        /* Tally embedded form — iframe content uses light theme by default,
+           so we give the wrapper a light background to ensure readable contrast */
+        .tally-embed {
+            max-width: 720px;
+            margin: 2rem auto 0;
+            background: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 1.5rem 1.25rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        .tally-embed iframe {
+            display: block;
+            width: 100%;
+            border: 0;
+            color-scheme: light;
+        }
+
+        /* Event photo banner at top of each timeline card */
+        .event-photo {
+            display: block;
+            width: calc(100% + 2 * var(--spacing-md));
+            margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) var(--spacing-md);
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+            filter: saturate(0.92);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .timeline-content:hover .event-photo {
+            filter: saturate(1);
+        }
+
+        /* Partners / Supporters */
+        .partners {
+            padding: 3rem 0 4rem;
+        }
+        .partners-intro {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0.25rem auto 2.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .partner {
+            background: var(--bg-card);
+            border: 1px solid rgba(102, 126, 234, 0.18);
+            border-radius: 14px;
+            padding: 1.75rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 130px;
+            transition: transform 0.25s, border-color 0.25s, background 0.25s;
+            text-decoration: none;
+            position: relative;
+        }
+        .partner:hover {
+            transform: translateY(-4px);
+            border-color: rgba(102, 126, 234, 0.55);
+            background: rgba(102, 126, 234, 0.06);
+        }
+        .partner-logo {
+            max-height: 56px;
+            max-width: 85%;
+            object-fit: contain;
+            filter: grayscale(0.35) brightness(1.05);
+            transition: filter 0.25s;
+        }
+        .partner:hover .partner-logo {
+            filter: grayscale(0) brightness(1.1);
+        }
+        /* Caption hidden by default; shown only when logo fails to load */
+        .partner-name {
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            line-height: 1.35;
+            padding: 0 0.25rem;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .partner-logo.failed { display: none; }
+        .partner-logo.failed + .partner-name { display: block; }
+        .partner-sub {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        .partners-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            margin-top: 2rem;
+            font-style: italic;
+        }
+        @media (max-width: 600px) {
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.85rem;
+            }
+            .partner {
+                min-height: 110px;
+                padding: 1.25rem 0.75rem;
+            }
+            .partner-logo { max-height: 44px; }
+        }
+
+        .founded-by {
+            text-align: center;
+            padding: 3rem 0 4rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        .founded-by a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+        .founded-by a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <p>This site has moved. Redirecting to <a href="https://helenlab.com/community/">helenlab.com/community</a>…</p>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="/" style="color: inherit; text-decoration: none;">Legal Tech Frontier</a>
+            </div>
+            <div class="nav-links">
+                <a href="https://helenlab.com/">Helen's Legal AI Lab</a>
+                <a href="https://helenlab.com/#what-we-do">Consultancy</a>
+                <a href="/">Community</a>
+                <a href="https://helenlab.com/valuestack/">Value Stack</a>
+                <a href="https://helenlab.com/openclawlaw">OpenClaw Law LLP</a>
+                <a href="https://helenlab.com/podcast/">Podcast</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="community-hero hero">
+        <div class="hero-bg"></div>
+        <div class="container" style="position: relative; z-index: 1;">
+            <h1 class="hero-title">Legal Tech Frontier</h1>
+            <p class="hero-subtitle" style="font-size: 1rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2rem;">
+                Silicon Valley Legal Tech Frontier
+            </p>
+            <p class="hero-subtitle">
+                A practitioner-driven legal AI community founded in Silicon Valley, connecting <strong style="color: var(--text-primary);">1,000+ professionals</strong> across the US and Asia.
+            </p>
+            <p class="hero-subtitle">
+                Since 2025, we've hosted <strong style="color: var(--text-primary);">10+ in-person events</strong> across Silicon Valley, Beijing, Shanghai, Shenzhen, Hong Kong, and Tokyo — bringing together attorneys, in-house counsel, legal ops professionals, and legal tech builders.
+            </p>
+
+            <div class="stats-row">
+                <div class="stat">
+                    <div class="stat-num">1,000+</div>
+                    <div class="stat-label">Members</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label">In-Person Events</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">6</div>
+                    <div class="stat-label">Cities</div>
+                </div>
+            </div>
+
+            <div class="cities-list">
+                <span class="city-chip">📍 Silicon Valley</span>
+                <span class="city-chip">📍 Beijing</span>
+                <span class="city-chip">📍 Shanghai</span>
+                <span class="city-chip">📍 Shenzhen</span>
+                <span class="city-chip">📍 Hong Kong</span>
+                <span class="city-chip">📍 Tokyo</span>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#join" class="cta-btn">Join Us Now</a>
+            </div>
+
+            <a href="https://helenlab.com/" class="back-link">← Helen's Legal AI Lab</a>
+        </div>
+    </section>
+
+    <!-- What We Do -->
+    <section class="what-we-do">
+        <div class="container community-cards">
+            <h2 class="section-title">What We Do</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">☕</div>
+                    <h3>Monthly Offline Meetups</h3>
+                    <p>Regular gatherings for networking and knowledge sharing — real conversations between practitioners, builders, and researchers.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📰</div>
+                    <h3>Monthly Legal AI &amp; Community Updates</h3>
+                    <p>Curated industry updates with practitioner takeaways — what's actually working in legal AI, distilled for busy lawyers. Plus monthly community event previews and recaps.</p><p style="margin-top: 0.75rem;"><a href="https://substack.com/@helenfan1" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan);">☕ Subscribe here</a></p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛠️</div>
+                    <h3>Legal AI Workshops</h3>
+                    <p>Hands-on sessions on AI tools and workflows for legal practice — learn by building, not just watching.</p>
+                </div>
+            </div>
+
+            <!-- Audience -->
+            <div class="audience-block">
+                <h2 class="section-title" style="margin-bottom: 0.5rem;">Who's in the Room</h2>
+                <p style="color: var(--text-secondary); margin-top: 0;">A cross-functional community of legal AI practitioners.</p>
+                <div class="audience-list">
+                    <span class="audience-chip">⚖️ Attorneys</span>
+                    <span class="audience-chip">🏢 In-house Counsel</span>
+                    <span class="audience-chip">⚙️ Legal Ops</span>
+                    <span class="audience-chip">🧑‍💻 Legal Tech Builders</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container">
+            <h2 class="section-title">Events &amp; Meetups</h2>
+
+            <!-- Past Events Timeline -->
+            <div class="past-events">
+                <h3 class="timeline-title">Past Events</h3>
+<div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">
+                                <span class="month">May</span>
+                                <span class="year">2026</span>
+                            </div>
+                            <div class="timeline-content">
+                                <img class="event-photo" src="img/events/11-stanford-ai-native.webp" alt="What Is an AI-Native Law Firm? meetup at Stanford Campus group photo" loading="lazy">
+                                <h4>What Is an AI-Native Law Firm?</h4>
+                                <p class="location">
+                                    <span class="icon">📍</span>
+                                    Stanford Campus, Palo Alto, CA
+                                </p>
+                                <a href="https://helenfan1.substack.com/p/how-silicon-valley-is-defining-ai" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">
+                                <span class="month">Apr</span>
+                                <span class="year">2026</span>
+                            </div>
+                            <div class="timeline-content">
+                                <img class="event-photo" src="img/events/01-pku-shenzhen.jpg" alt="How to Become an AI-Native In-House Counsel at PKU Shenzhen lecture hall" loading="lazy">
+                                <h4>How to Become an AI-Native In-House Counsel</h4>
+                                <p class="location">
+                                    <span class="icon">📍</span>
+                                    Peking University, Shenzhen, China
+                                </p>
+                                <a href="https://open.substack.com/pub/helenfan1/p/how-to-become-an-ai-native-in-house" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">
+                                <span class="month">Mar</span>
+                                <span class="year">2026</span>
+                            </div>
+                            <div class="timeline-content">
+                                <img class="event-photo" src="img/events/02-tokyo-agi-summit.jpg" alt="Way to AGI 2026 Tokyo Summit group photo" loading="lazy">
+                                <h4>Way to AGI 2026 Tokyo Summit</h4>
+                                <p class="location">
+                                    <span class="icon">📍</span>
+                                    Tokyo, Japan
+                                </p>
+                                <a href="https://helenlegalailab.notion.site/When-Vertical-AI-Gets-Real-36918667622480308eefde3569231ed2" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">
+                                <span class="month">Mar</span>
+                                <span class="year">2026</span>
+                            </div>
+                            <div class="timeline-content">
+                                <img class="event-photo" src="img/events/03-tokyo-openclaw.jpg" alt="OpenClaw x Legal Professionals Tokyo meetup group photo" loading="lazy">
+                                <h4>OpenClaw x Legal Professionals</h4>
+                                <p class="location">
+                                    <span class="icon">📍</span>
+                                    Tokyo, Japan
+                                </p>
+                                <a href="https://helenlegalailab.notion.site/What-Can-OpenClaw-Do-for-Us-Tokyo-369186676224807ea6a7d651784a1493" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                        <div class="timeline-date">
+                            <span class="month">Jan</span>
+                            <span class="year">2026</span>
+                        </div>
+                        <div class="timeline-content">
+                            <img class="event-photo" src="img/events/04-fb-house.jpg" alt="What Makes Lawyers Actually Use AI? meetup at Facebook House group photo" loading="lazy">
+                            <h4>What Makes Lawyers Actually Use AI?</h4>
+                            <p class="location">
+                                <span class="icon">📍</span>
+                                Facebook House, Los Altos, CA
+                            </p>
+                            <a href="https://substack.com/home/post/p-188884545" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <span class="month">Dec</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="timeline-content">
+                            <img class="event-photo" src="img/events/05-hsf-hk.jpg" alt="GC X AI Adoption meetup at HSF Hong Kong group photo" loading="lazy">
+                            <h4>GC X AI Adoption</h4>
+                            <p class="location">
+                                <span class="icon">📍</span>
+                                Herbert Smith Freehills Kramer Office, Central, Hong Kong
+                            </p>
+                            <a href="https://www.linkedin.com/posts/helenfanlegalai_sv-legal-tech-frontier-community-gc-ai-activity-7410304744017027072-u8tE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB69MUUBZrW0stD7-0NXIzsV-eBieLqcTOM" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <span class="month">Dec</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="timeline-content">
+                            <img class="event-photo" src="img/events/06-shanghai.jpg" alt="Shanghai meetup group photo with Lujiazui skyline" loading="lazy">
+                            <h4>Where Should Young Legal Professionals Go in the Age of AI?</h4>
+                            <p class="location">
+                                <span class="icon">📍</span>
+                                White Magnolia Plaza, Shanghai
+                            </p>
+                            <a href="https://www.linkedin.com/posts/helenfanlegalai_sv-legal-tech-frontier-community-shanghai-activity-7405605624731906048-uYjx?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB69MUUBZrW0stD7-0NXIzsV-eBieLqcTOM" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <span class="month">Nov</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="timeline-content">
+                            <img class="event-photo" src="img/events/07-hankun-beijing.jpg" alt="Beijing meetup at Han Kun Law Offices group photo" loading="lazy">
+                            <h4>How Legal Professionals Can Navigate Opportunities and Change in the AI Era</h4>
+                            <p class="location">
+                                <span class="icon">📍</span>
+                                Han Kun Law Offices, Beijing (closed-door meeting)
+                            </p>
+                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7400938648042479616/" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <span class="month">Oct</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="timeline-content">
+                            <img class="event-photo" src="img/events/08-stanford.webp" alt="Litigation X AI meetup at Stanford group photo" loading="lazy">
+                            <h4>Litigation X AI</h4>
+                            <p class="location">
+                                <span class="icon">📍</span>
+                                Stanford University, Palo Alto, CA
+                            </p>
+                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7388687602385801217/" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <span class="month">Sep</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="timeline-content">
+                            <img class="event-photo" src="img/events/09-san-jose.webp" alt="IP Law X AI meetup in San Jose illustration" loading="lazy">
+                            <h4>IP Law X AI</h4>
+                            <p class="location">
+                                <span class="icon">📍</span>
+                                San Jose, CA
+                            </p>
+                            <a href="https://www.linkedin.com/posts/helenfanlegalai_notion-the-connected-workspace-with-site-activity-7375598179901136897-sjKc?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB69MUUBZrW0stD7-0NXIzsV-eBieLqcTOM" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <span class="month">Aug</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="timeline-content">
+                            <img class="event-photo" src="img/events/10-santa-clara.webp" alt="Santa Clara kickoff meetup illustration" loading="lazy">
+                            <h4>Legal AI Meetup</h4>
+                            <p class="location">
+                                <span class="icon">📍</span>
+                                Santa Clara, CA
+                            </p>
+                            <a href="https://www.linkedin.com/posts/helenfanlegalai_legalai-legaltech-bayarealawyers-activity-7368703129531416579-8rOI" class="recap-btn" target="_blank" rel="noopener noreferrer">View Recap</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Partners / Supporters -->
+    <section id="partners" class="partners">
+        <div class="container">
+            <h2 class="section-title">Event Partners &amp; Hosts</h2>
+            <p class="partners-intro">Universities, law firms, and communities that have hosted, sponsored, or supported our meetups across the US and Asia.</p>
+
+            <div class="partners-grid">
+                <a class="partner" href="https://www.stanford.edu" target="_blank" rel="noopener noreferrer" title="Stanford University">
+                    <img class="partner-logo" src="https://logo.clearbit.com/stanford.edu?size=256" alt="Stanford University" loading="lazy" onerror="this.classList.add('failed')">
+                    <div class="partner-name">Stanford University</div>
+                </a>
+                <a class="partner" href="https://www.pku.edu.cn" target="_blank" rel="noopener noreferrer" title="Peking University">
+                    <img class="partner-logo" src="https://logo.clearbit.com/pku.edu.cn?size=256" alt="Peking University" loading="lazy" onerror="this.classList.add('failed')">
+                    <div class="partner-name">Peking University</div>
+                </a>
+                <a class="partner" href="https://www.hsfkramer.com" target="_blank" rel="noopener noreferrer" title="Herbert Smith Freehills Kramer">
+                    <img class="partner-logo" src="https://logo.clearbit.com/hsfkramer.com?size=256" alt="Herbert Smith Freehills Kramer" loading="lazy" onerror="this.classList.add('failed')">
+                    <div class="partner-name">Herbert Smith Freehills Kramer</div>
+                </a>
+                <a class="partner" href="https://www.hankunlaw.com" target="_blank" rel="noopener noreferrer" title="Han Kun Law Offices">
+                    <img class="partner-logo" src="https://logo.clearbit.com/hankunlaw.com?size=256" alt="Han Kun Law Offices" loading="lazy" onerror="this.classList.add('failed')">
+                    <div class="partner-name">Han Kun Law Offices</div>
+                </a>
+                <a class="partner" href="https://www.waytoagi.com" target="_blank" rel="noopener noreferrer" title="WaytoAGI">
+                    <img class="partner-logo" src="https://logo.clearbit.com/waytoagi.com?size=256" alt="WaytoAGI" loading="lazy" onerror="this.classList.add('failed')">
+                    <div class="partner-name">WaytoAGI</div>
+                </a>
+                <a class="partner" href="https://www.linkloud.com" target="_blank" rel="noopener noreferrer" title="Linkloud">
+                    <img class="partner-logo" src="https://logo.clearbit.com/linkloud.com?size=256" alt="Linkloud" loading="lazy" onerror="this.classList.add('failed')">
+                    <div class="partner-name">Linkloud</div>
+                </a>
+                <a class="partner" href="https://about.meta.com" target="_blank" rel="noopener noreferrer" title="Facebook House (hosted by Meta)">
+                    <img class="partner-logo" src="https://logo.clearbit.com/meta.com?size=256" alt="Facebook House" loading="lazy" onerror="this.classList.add('failed')">
+                    <div class="partner-name">Facebook House</div>
+                </a>
+            </div>
+
+            <p class="partners-note">Logos and trademarks belong to their respective owners.</p>
+        </div>
+    </section>
+
+    <!-- Join the Community Section -->
+    <section id="join" class="join">
+        <div class="container">
+            <div class="join-content">
+                <h2 class="section-title">Join the Community</h2>
+
+                <div class="join-text">
+                    <p>
+                        Join the SV Legal Tech Frontier Community and connect with 1000+ legal tech professionals exploring how AI is transforming the legal industry.<br>
+                        If you&#39;re curious about the future and want to meet people who are thinking deeply—we&#39;d love to have you.
+                    </p>
+                </div>
+
+                <div class="tally-embed">
+                    <iframe data-tally-src="https://tally.so/embed/GxbvDo?alignLeft=1&amp;hideTitle=1&amp;hideCover=1&amp;transparentBackground=1&amp;dynamicHeight=1" loading="lazy" width="100%" height="842" frameborder="0" marginheight="0" marginwidth="0" title="Join Legal Tech Frontier"></iframe>
+                    <noscript>
+                        <p style="text-align: center; color: var(--text-muted);">
+                            JavaScript is required to load the form.
+                            <a href="https://tally.so/r/GxbvDo" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan);">Open form in new tab →</a>
+                        </p>
+                    </noscript>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founded By -->
+    <section class="founded-by">
+        <div class="container">
+            <p>
+                Founded by <a href="https://helenlab.com/#about">Helen Fan</a>. Part of <a href="https://helenlab.com/">Helen's Legal AI Lab</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025-2026 Helen's Legal AI Lab. Built with curiosity and care.</p>
+        </div>
+    </footer>
+    <!-- Tally embed loader -->
+    <script>
+        var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
+    </script>
 </body>
 </html>
