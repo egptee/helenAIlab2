@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Past Events — Legal Tech Frontier</title>
+    <title>Events — Legal Tech Frontier</title>
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Past Events | Legal Tech Frontier">
-    <meta property="og:description" content="10+ in-person legal AI gatherings hosted across Silicon Valley, Beijing, Shanghai, Shenzhen, Hong Kong, and Tokyo since 2025.">
+    <meta property="og:title" content="Events | Legal Tech Frontier">
+    <meta property="og:description" content="Upcoming and past legal AI gatherings — 10+ in-person events hosted across Silicon Valley, New York, and Asia since 2025.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://svlegaltechfrontier.com/events/">
     <meta property="og:locale" content="en_US">
@@ -44,6 +44,42 @@
         }
         .back-link:hover { opacity: 0.75; }
 
+        /* Upcoming event featured card */
+        .upcoming { padding: 1rem 0 2rem; }
+        .upcoming-card {
+            max-width: 820px;
+            margin: 1.5rem auto 0;
+            background: var(--bg-card);
+            border: 1px solid rgba(102, 126, 234, 0.35);
+            border-radius: 20px;
+            padding: 2.25rem 2rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        .upcoming-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--gradient-secondary);
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1.1rem;
+        }
+        .upcoming-card h3 {
+            font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+            margin: 0 0 1.5rem;
+            color: var(--text-primary);
+            line-height: 1.25;
+        }
+        .event-meta { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.75rem; }
+        .event-meta .row {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            color: var(--text-secondary); font-size: 1.02rem; line-height: 1.5;
+        }
+        .event-meta .row .ico { font-size: 1.15rem; flex-shrink: 0; line-height: 1.4; }
+        .event-meta .row strong { color: var(--text-primary); font-weight: 600; }
+
         /* Event photo banner at top of each timeline card */
         .event-photo {
             display: block;
@@ -70,7 +106,7 @@
             </div>
             <div class="nav-links">
                 <a href="/#about">About</a>
-                <a href="/#events">Events</a>
+                <a href="/events/">Events</a>
                 <a href="/#join">Join</a>
                 <a href="https://helenlab.com/">Helen's Legal AI Lab ↗</a>
             </div>
@@ -81,15 +117,41 @@
     <section class="events-hero hero">
         <div class="hero-bg"></div>
         <div class="container" style="position: relative; z-index: 1;">
-            <h1 class="hero-title">Past Events</h1>
+            <h1 class="hero-title">Events</h1>
             <p class="hero-subtitle">
-                Since 2025 we've hosted 10+ in-person legal AI gatherings across Silicon Valley and Asia &mdash; bringing together attorneys, in-house counsel, legal ops professionals, and legal tech builders.
+                Our next gathering and the 10+ in-person legal AI events we've hosted across Silicon Valley, New York, and Asia since 2025.
             </p>
-            <a href="/#events" class="back-link">← Back to home</a>
+            <a href="/" class="back-link">← Back to home</a>
         </div>
     </section>
 
-    <!-- Past Events Timeline -->
+    <!-- Upcoming Event -->
+    <section id="upcoming" class="upcoming">
+        <div class="container">
+            <h2 class="section-title">Upcoming Event</h2>
+            <div class="upcoming-card">
+                <span class="upcoming-badge">Next Up</span>
+                <h3>What Is an AI-Native Legal Team?</h3>
+                <div class="event-meta">
+                    <div class="row">
+                        <span class="ico">📅</span>
+                        <div><strong>Friday, July 17, 2026</strong> &middot; 6:00&ndash;8:00&nbsp;PM EST</div>
+                    </div>
+                    <div class="row">
+                        <span class="ico">📍</span>
+                        <div><strong>Cooley LLP</strong>, New York Office &mdash; New York City</div>
+                    </div>
+                    <div class="row">
+                        <span class="ico">🤝</span>
+                        <div>Hosted by <strong>Asian American Bar Association of New York</strong> &amp; <strong>Cooley LLP</strong></div>
+                    </div>
+                </div>
+                <a href="/#join" class="cta-btn">RSVP &middot; Join the Community &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events -->
     <section class="events">
         <div class="container">
             <div class="past-events">
