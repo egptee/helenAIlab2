@@ -243,23 +243,27 @@ img, video, canvas, svg { max-width:100%; max-height:100%; }
 .lt-head { font-family:var(--serif); font-weight:300; font-size:60px; line-height:1.02; letter-spacing:-0.02em; color:var(--ink); margin:0 0 8px; }
 .lt-head .em { font-style:italic; color:var(--sky-deep); }
 .lt-sub { font-size:22px; color:var(--ink-soft); margin-bottom:24px; }
-.lt-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:26px; }
+.lt-cols { display:grid; grid-template-columns:1.08fr 0.92fr; gap:38px; align-items:start; }
+.lt-col-lbl { font-size:15px; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; color:var(--sky-deep); margin-bottom:16px; }
+.lt-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
 .lt-card { background:#fff; border:1px solid var(--sky-soft); border-radius:16px; padding:20px 24px; box-shadow:0 12px 30px rgba(22,50,79,0.06); position:relative; }
 .lt-card::before { content:""; position:absolute; top:18px; left:0; width:5px; height:32px; background:var(--yellow); border-radius:0 4px 4px 0; }
 .lt-name { font-family:var(--serif); font-size:29px; font-weight:400; color:var(--ink); line-height:1.05; margin-bottom:7px; letter-spacing:-0.01em; }
 .lt-title { font-size:18px; font-weight:700; color:var(--sky-deep); line-height:1.28; margin-bottom:4px; }
 .lt-org { font-size:17px; color:var(--ink-mute); line-height:1.32; }
 
-.lt-fmt { background:linear-gradient(165deg,#fff 0%, #fff8e2 100%); border:1px solid #f3dd9a; border-radius:20px; padding:22px 34px; box-shadow:0 12px 30px rgba(22,50,79,0.06); }
+.lt-fmt { background:linear-gradient(165deg,#fff 0%, #fff8e2 100%); border:1px solid #f3dd9a; border-radius:20px; padding:26px 34px; box-shadow:0 12px 30px rgba(22,50,79,0.06); }
 .lt-fmt-lbl { font-size:15px; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; color:var(--yellow-deep); margin-bottom:14px; }
 .lt-step { display:flex; align-items:baseline; gap:12px; margin-bottom:9px; }
 .lt-sn { width:26px; height:26px; flex-shrink:0; border-radius:50%; background:var(--yellow); color:#5a4300; font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; transform:translateY(3px); }
 .lt-step div { font-size:19px; line-height:1.35; color:var(--ink-soft); }
 .lt-step b { color:var(--ink); font-weight:700; }
-.lt-qrow { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:16px; padding-top:16px; border-top:1px solid #f0e2b8; }
-.lt-q .qn { font-family:var(--serif); font-size:20px; font-weight:600; color:var(--sky-deep); }
-.lt-q .qt { display:block; font-size:19px; color:var(--ink); font-weight:700; margin:3px 0 3px; }
-.lt-q .qd { font-size:17px; color:var(--ink-mute); line-height:1.35; }
+.lt-qrow { display:flex; flex-direction:column; gap:16px; margin-top:18px; padding-top:18px; border-top:1px solid #f0e2b8; }
+.lt-q { display:flex; align-items:baseline; gap:14px; }
+.lt-q .qn { font-family:var(--serif); font-size:23px; font-weight:600; color:var(--sky-deep); flex-shrink:0; }
+.lt-q .qbody { display:flex; flex-direction:column; }
+.lt-q .qt { font-size:21px; color:var(--ink); font-weight:700; margin:0 0 3px; }
+.lt-q .qd { font-size:18px; color:var(--ink-mute); line-height:1.4; }
 
 /* controls */
 .deck-controls { display:flex; gap:14px; align-items:center; background:rgba(255,255,255,0.9); border:1px solid #dbe7f2; padding:9px 16px; border-radius:100px; backdrop-filter:blur(8px); box-shadow:0 6px 20px rgba(22,50,79,0.1); }
@@ -357,7 +361,7 @@ img, video, canvas, svg { max-width:100%; max-height:100%; }
           <p class="s3-p anim d3">A community of attorneys, in-house counsel, and builders exploring what AI really means for legal work. <span class="hl">Born in Silicon Valley,</span> now global.</p>
           <div class="s3-stats anim d4">
             <div class="s3-stat"><div class="k">1,000+</div><div class="v">Members</div></div>
-            <div class="s3-stat"><div class="k">5 cities</div><div class="v">SV · Beijing · Shanghai · HK · Tokyo</div></div>
+            <div class="s3-stat"><div class="k">7 cities</div><div class="v" style="max-width:250px">SV · New York · Tokyo · Beijing · Shanghai · HK · Shenzhen</div></div>
             <div class="s3-stat"><div class="k">Tonight</div><div class="v">First on the East Coast</div></div>
           </div>
         </div>
@@ -571,46 +575,51 @@ img, video, canvas, svg { max-width:100%; max-height:100%; }
       <div class="lt-wrap">
         <h2 class="lt-head anim d1">What is an <span class="em">AI-native</span> Legal Team?</h2>
         <p class="lt-sub anim d1">Meet tonight’s lightning speakers — here’s the five-minute format they’ll follow.</p>
-        <div class="lt-grid">
-          <div class="lt-card anim d2">
-            <div class="lt-name">Bill Price</div>
-            <div class="lt-title">Founder &amp; CLO</div>
-            <div class="lt-org">Subscription GC</div>
+        <div class="lt-cols">
+          <div class="lt-col-left anim d2">
+            <div class="lt-col-lbl">Our lightning speakers</div>
+            <div class="lt-grid">
+              <div class="lt-card">
+                <div class="lt-name">Bill Price</div>
+                <div class="lt-title">Founder &amp; CLO</div>
+                <div class="lt-org">Subscription GC</div>
+              </div>
+              <div class="lt-card">
+                <div class="lt-name">Nancy Peterson</div>
+                <div class="lt-title">Former General Counsel, North America</div>
+                <div class="lt-org">Allied Universal</div>
+              </div>
+              <div class="lt-card">
+                <div class="lt-name">Shanshan Zhao</div>
+                <div class="lt-title">VP, Global Market Regulatory Compliance Officer</div>
+                <div class="lt-org">Crédit Agricole CIB</div>
+              </div>
+              <div class="lt-card">
+                <div class="lt-name">Jing Zhang</div>
+                <div class="lt-title">Legal Counsel</div>
+                <div class="lt-org">World Insurance Associates</div>
+              </div>
+              <div class="lt-card">
+                <div class="lt-name">Mark A. Herschberg</div>
+                <div class="lt-title">CTO</div>
+                <div class="lt-org">Stynt</div>
+              </div>
+              <div class="lt-card">
+                <div class="lt-name">Hazel Zhang</div>
+                <div class="lt-title">Tax Lawyer</div>
+                <div class="lt-org">PwC</div>
+              </div>
+            </div>
           </div>
-          <div class="lt-card anim d2">
-            <div class="lt-name">Nancy Peterson</div>
-            <div class="lt-title">Former General Counsel, North America</div>
-            <div class="lt-org">Allied Universal</div>
-          </div>
-          <div class="lt-card anim d3">
-            <div class="lt-name">Shanshan Zhao</div>
-            <div class="lt-title">VP, Global Market Regulatory Compliance Officer</div>
-            <div class="lt-org">Crédit Agricole CIB</div>
-          </div>
-          <div class="lt-card anim d3">
-            <div class="lt-name">Jing Zhang</div>
-            <div class="lt-title">Legal Counsel</div>
-            <div class="lt-org">World Insurance Associates</div>
-          </div>
-          <div class="lt-card anim d4">
-            <div class="lt-name">Mark A. Herschberg</div>
-            <div class="lt-title">CTO</div>
-            <div class="lt-org">Stynt</div>
-          </div>
-          <div class="lt-card anim d4">
-            <div class="lt-name">Hazel Zhang</div>
-            <div class="lt-title">Tax Lawyer</div>
-            <div class="lt-org">PwC</div>
-          </div>
-        </div>
-        <div class="lt-fmt anim d5">
-          <div class="lt-fmt-lbl">The lightning format</div>
-          <div class="lt-step"><span class="lt-sn">1</span><div><b>One line:</b> what is an AI-native legal team, in your mind?</div></div>
-          <div class="lt-step"><span class="lt-sn">2</span><div><b>Then pick one</b> of the questions below that hits closest, and share for ~5 min.</div></div>
-          <div class="lt-qrow">
-            <div class="lt-q"><span class="qn">Q1</span><span class="qt">Reality check</span><span class="qd">What’s actually working vs. what’s still hype?</span></div>
-            <div class="lt-q"><span class="qn">Q2</span><span class="qt">Governance</span><span class="qd">Managing risk as agents take on real work.</span></div>
-            <div class="lt-q"><span class="qn">Q3</span><span class="qt">People</span><span class="qd">Building and training a team that’s ready.</span></div>
+          <div class="lt-fmt anim d3">
+            <div class="lt-fmt-lbl">The lightning format</div>
+            <div class="lt-step"><span class="lt-sn">1</span><div><b>One line:</b> what is an AI-native legal team, in your mind?</div></div>
+            <div class="lt-step"><span class="lt-sn">2</span><div><b>Then pick one</b> of the questions below that hits closest, and share for ~5 min.</div></div>
+            <div class="lt-qrow">
+              <div class="lt-q"><span class="qn">Q1</span><div class="qbody"><span class="qt">Reality check</span><span class="qd">What’s actually working vs. what’s still hype?</span></div></div>
+              <div class="lt-q"><span class="qn">Q2</span><div class="qbody"><span class="qt">Governance</span><span class="qd">Managing risk as agents take on real work.</span></div></div>
+              <div class="lt-q"><span class="qn">Q3</span><div class="qbody"><span class="qt">People</span><span class="qd">Building and training a team that’s ready.</span></div></div>
+            </div>
           </div>
         </div>
       </div>
